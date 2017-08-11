@@ -1,8 +1,10 @@
 ## Kali Script 
 Personal collection of scripts after Kali 2017.1 installation.
+
+# Credits
 Based on g0tmi1k scripts [**GitHub g0tmi1k**](https://github.com/g0tmi1k/os-scripts).
 
-#Changelog
+# Changelog
 ## 11/08/2017
 - Remove folders (Public, Documents, Music, Pictures, Videos, Templates)
 - Disable auto notification and screensaver

@@ -1,6 +1,6 @@
-## Kali Script 
+# Kali Script 
 Personal collection of scripts after Kali 2017.1 installation.
-
+We accept Pull Request :)
 # Credits
 Based on g0tmi1k scripts [**GitHub g0tmi1k**](https://github.com/g0tmi1k/os-scripts).
 

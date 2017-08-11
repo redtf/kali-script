@@ -587,18 +587,14 @@ apt -y -qq install http-tunnel \
 echo -e "\n${GREEN}[+]${RESET} Installing ${GREEN}sshuttle${RESET} ~ VPN over SSH"
 apt -y -qq install sshuttle \
   || echo -e ' '${RED}'[!] Issue with apt install'${RESET} 1>&2
-#--- Example
-#sshuttle --dns --remote root@123.9.9.9 0/0 -vv
 
 ##### Install gobuster
 echo -e "\n${GREEN}[+]${RESET} Installing ${GREEN}gobuster${RESET} ~ Directory/file % DNS busting tool written in Go"
-apt -y -qq install http-tunnel \
+apt -y -qq install gobuster \
   || echo -e ' '${RED}'[!] Issue with apt install'${RESET} 1>&2
 
 ###Python Dependencies
 apt -y -qq install python2.7 python-pip python-dev git libssl-dev libffi-dev build-essential wine32
-
-##### GitHub Repositories 
 
 ##### Install exiftool
 echo -e "\n${GREEN}[+]${RESET} Installing ${GREEN}exiftool${RESET} ~ Exiftool Metadata Information"
@@ -609,6 +605,71 @@ cd Image-ExifTool-10.53
 perl Makefile.PL
 make test
 make install
+
+##### The Bug Hunters Methodology v2
+echo -e "\n${GREEN}[+]${RESET} Installing ${GREEN}sublist3r${RESET}"
+git clone https://github.com/aboul3la/Sublist3r.git /opt/tbhm/discovery/sublist3r
+
+echo -e "\n${GREEN}[+]${RESET} Installing ${GREEN}brutesubs${RESET}"
+git clone https://github.com/anshumanbh/brutesubs.git /opt/tbhm/discovery/brutesubs
+
+echo -e "\n${GREEN}[+]${RESET} Installing ${GREEN}cloudflare-enum${RESET}"
+git clone https://github.com/mandatoryprogrammer/cloudflare_enum /opt/tbhm/discovery/cloudflare-enum
+
+echo -e "\n${GREEN}[+]${RESET} Installing ${GREEN}censys${RESET}"
+git clone https://gist.github.com/anshumanbh/96a0b81dfe318e9e956013209e178fa /opt/tbhm/discovery/censys 
+
+echo -e "\n${GREEN}[+]${RESET} Installing ${GREEN}massdns${RESET}"
+git clone https://github.com/blechschmidt/massdns /opt/tbhm/discovery/massdns
+
+echo -e "\n${GREEN}[+]${RESET} Installing ${GREEN}list-subs${RESET}"
+git clone https://gist.github.com/jhaddix/86a06c5dc309d08580a018c66354a056 /opt/tbhm/discovery/list-subs.txt
+
+echo -e "\n${GREEN}[+]${RESET} Installing ${GREEN}EyeWitness${RESET}"
+git clone https://github.com/ChrisTruncer/EyeWitness /opt/tbhm/discovery/eyewitness 
+
+echo -e "\n${GREEN}[+]${RESET} Installing ${GREEN}robotsdisallowed${RESET}"
+git clone https://github.com/danielmiessler/RobotsDisallowed /opt/tbhm/discovery/robotsdisallowed 
+
+echo -e "\n${GREEN}[+]${RESET} Installing ${GREEN}parameth ${RESET}"
+git clone https://github.com/maK-/parameth /opt/tbhm/discovery/parameth 
+
+
+echo -e "\n${GREEN}[+]${RESET} Installing ${GREEN}ground-control${RESET}"
+git clone https://github.com/jobertabma/ground-control /opt/tbhm/web/ground-control 
+
+echo -e "\n${GREEN}[+]${RESET} Installing ${GREEN}sleepy-puppy${RESET}"
+git clone https://github.com/Netflix/sleepy-puppy /opt/tbhm/web/sleepy-puppy  
+
+echo -e "\n${GREEN}[+]${RESET} Installing ${GREEN}xsshunter${RESET}"
+git clone https://github.com/mandatoryprogrammer/xsshunter /opt/tbhm/web/xsshunter   
+
+echo -e "\n${GREEN}[+]${RESET} Installing ${GREEN}tplmap${RESET}"
+git clone https://github.com/epinna/tplmap /opt/tbhm/web/tplmap 
+
+echo -e "\n${GREEN}[+]${RESET} Installing ${GREEN}psychopath ${RESET}"
+git clone https://github.com/ewilded/psychopath /opt/tbhm/web/psychopath 
+
+
+echo -e "\n${GREEN}[+]${RESET} Installing ${GREEN}autosubtakeover${RESET}"
+git clone https://github.com/JordyZomer/autoSubTakeover /opt/tbhm/misc/autosubtakeover 
+
+echo -e "\n${GREEN}[+]${RESET} Installing ${GREEN}hostilesubbruteforcer${RESET}"
+git clone  https://github.com/nahamsec/HostileSubBruteforcer /opt/tbhm/misc/hostilesubbruteforcer  
+
+echo -e "\n${GREEN}[+]${RESET} Installing ${GREEN}tko-subs${RESET}"
+git clone https://github.com/anshumanbh/tko-subs /opt/tbhm/misc/tko-subs 
+
+echo -e "\n${GREEN}[+]${RESET} Installing ${GREEN}sandcastle${RESET}"
+git clone https://github.com/yasinS/sandcastle /opt/tbhm/misc/sandcastle 
+
+echo -e "\n${GREEN}[+]${RESET} Installing ${GREEN}gitrob${RESET}"
+git clone https://github.com/michenriksen/gitrob /opt/tbhm/misc/gitrob 
+
+echo -e "\n${GREEN}[+]${RESET} Installing ${GREEN}trufflehog   ${RESET}"
+git clone https://github.com/dxa4481/truffleHog /opt/tbhm/misc/trufflehog  
+
+##### GitHub Repositories 
 
 ##### Install PEDA
 echo -e "\n${GREEN}[+]${RESET} Installing ${GREEN}PEDA${RESET}"
@@ -626,6 +687,20 @@ git clone https://github.com/zardus/ctf-tools /opt/ctf-tools
 ##### Install GitTools
 echo -e "\n${GREEN}[+]${RESET} Installing ${GREEN}GitTools${RESET}"
 git clone https://github.com/internetwache/GitTools /opt/gittools
+
+echo "
+if [ -z $1 ]; then
+  echo \"Usage: $0 website.com\"
+  exit
+fi
+TARGET=$1
+DIRCLONE=/root/Desktop/$TARGET\"_clone\"
+DIRDUMP=/root/Desktop/$TARGET\"_dump\"
+echo \"Downloading git repo from $TARGET\"
+bash /opt/gittools/Dumper/gitdumper.sh $TARGET/.git/ $DIRCLONE
+git checkout -- $DIRCLONE
+bash /opt/gittools/Extractor/extractor.sh $DIRCLONE $DIRDUMP
+find $DIRDUMP -name \"commit-meta.txt\" -exec cat {} \; > all-commit-meta.txt " >> /opt/gittools/download_git.sh
 
 ##### Install mimipenguin
 echo -e "\n${GREEN}[+]${RESET} Installing ${GREEN}mimipenguin${RESET}"
@@ -660,7 +735,6 @@ pip install --upgrade pwntools
 echo -e "\n${GREEN}[+]${RESET} Installing ${GREEN}ltrace${RESET} ~ Linux debugging tool"
 apt -y -qq install ltrace \
   || echo -e ' '${RED}'[!] Issue with apt install'${RESET} 1>&2
-
 
 ##### Install gcc & multilib
 echo -e "\n${GREEN}[+]${RESET} Installing ${GREEN}gcc${RESET} & ${GREEN}multilibc${RESET} ~ compiling libraries"

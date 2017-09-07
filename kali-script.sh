@@ -7,11 +7,6 @@ BLUE="\033[01;34m"     # Heading
 BOLD="\033[01;01m"     # Highlight
 RESET="\033[00m"       # Normal
 
-BANNER="\n${BOLD}[!] ${RED}[Red]${RESET} ${RED}[T]${RESET}${BOLD}eam ${RED}[F]${RESET}${BOLD}ield [!]${RESET}"
-for i in {1..5}
-do
-  echo -e $BANNER
-done
 echo -e "\n${YELLOW}[!]${RESET} The installation will start in 5 seconds"
 
 sleep 5
@@ -190,7 +185,7 @@ grep -q '^eval "$(dircolors)"' "${file}" 2>/dev/null \
 grep -q "^alias ls='ls $LS_OPTIONS'" "${file}" 2>/dev/null \
   || echo "alias ls='ls $LS_OPTIONS'" >> "${file}"
 grep -q "^alias sys_update='apt-get update -y && apt-get distupgrade -y && apt-get upgrade -y && apt-get autoremove -y && apt-get autoclean'" "${file}" 2>/dev/null \
-  || echo "alias ls='apt-get update -y && apt-get distupgrade -y && apt-get upgrade -y && apt-get autoremove -y && apt-get autoclean'" >> "${file}"
+  || echo "alias sys_update='apt-get update -y && apt-get distupgrade -y && apt-get upgrade -y && apt-get autoremove -y && apt-get autoclean'" >> "${file}"
 grep -q "^alias ll='ls $LS_OPTIONS -l'" "${file}" 2>/dev/null \
   || echo "alias ll='ls $LS_OPTIONS -l'" >> "${file}"
 grep -q "^alias l='ls $LS_OPTIONS -lA'" "${file}" 2>/dev/null \
@@ -425,8 +420,8 @@ sed -i 's#^</DL><p>#    <DT><A HREF="http://shell-storm.org/shellcode/">Shelcode
 sed -i 's#^</DL><p>#    <DT><A HREF="http://ropshell.com/">ROP Shell</A>\n</DL><p>#' "${file}"                    # Add ROP Shell to bookmark toolbar
 sed -i 's#^</DL><p>#    <DT><A HREF="https://ifconfig.io/">ifconfig</A>\n</DL><p>#' "${file}"                     # Add ifconfig.io to bookmark toolbar
 sed -i 's#^</DL><p>#    <DT><A HREF="https://pentestmonkey.net/">PentestMonkey</A>\n</DL><p>#' "${file}"          # Add PentestMonkey to bookmark $
-sed -i 's#^</DL><p>#    <DT><A HREF="https://howucan.gr/">Howucan</A>\n</DL><p>#' "${file}"          # Add howucan.gr
-sed -i 's#^</DL><p>#    <DT><A HREF="https://crt.sh/">crt.sh</A>\n</DL><p>#' "${file}"          # Add crt.sh
+sed -i 's#^</DL><p>#    <DT><A HREF="https://howucan.gr/">Howucan</A>\n</DL><p>#' "${file}"                       # Add howucan.gr
+sed -i 's#^</DL><p>#    <DT><A HREF="https://crt.sh/">crt.sh</A>\n</DL><p>#' "${file}"                            # Add crt.sh
 
 sed -i 's#<HR>#<DT><H3 ADD_DATE="1303667175" LAST_MODIFIED="1303667175" PERSONAL_TOOLBAR_FOLDER="true">Bookmarks Toolbar</H3>\n<DD>Add bookmarks to this folder to see them displayed on the Bookmarks Toolbar#' "${file}"
 #--- Clear bookmark cache
@@ -605,19 +600,20 @@ cd Image-ExifTool-10.53
 perl Makefile.PL
 make test
 make install
+cd ..
+rm -rf Image-ExifTool-10.53
+
+##### GitHub Repositories 
 
 ##### The Bug Hunters Methodology v2
 echo -e "\n${GREEN}[+]${RESET} Installing ${GREEN}sublist3r${RESET}"
-git clone https://github.com/aboul3la/Sublist3r.git /opt/tbhm/discovery/sublist3r
+git clone https://github.com/DaniLabs/sublist3r /opt/tbhm/discovery/sublist3r
 
 echo -e "\n${GREEN}[+]${RESET} Installing ${GREEN}brutesubs${RESET}"
-git clone https://github.com/anshumanbh/brutesubs.git /opt/tbhm/discovery/brutesubs
+git clone https://github.com/anshumanbh/brutesubs /opt/tbhm/discovery/brutesubs
 
 echo -e "\n${GREEN}[+]${RESET} Installing ${GREEN}cloudflare-enum${RESET}"
 git clone https://github.com/mandatoryprogrammer/cloudflare_enum /opt/tbhm/discovery/cloudflare-enum
-
-echo -e "\n${GREEN}[+]${RESET} Installing ${GREEN}censys${RESET}"
-git clone https://gist.github.com/anshumanbh/96a0b81dfe318e9e956013209e178fa /opt/tbhm/discovery/censys 
 
 echo -e "\n${GREEN}[+]${RESET} Installing ${GREEN}massdns${RESET}"
 git clone https://github.com/blechschmidt/massdns /opt/tbhm/discovery/massdns
@@ -634,6 +630,8 @@ git clone https://github.com/danielmiessler/RobotsDisallowed /opt/tbhm/discovery
 echo -e "\n${GREEN}[+]${RESET} Installing ${GREEN}parameth ${RESET}"
 git clone https://github.com/maK-/parameth /opt/tbhm/discovery/parameth 
 
+echo -e "\n${GREEN}[+]${RESET} Installing ${GREEN}KnockPy ${RESET}"
+git clone https://github.com/guelfoweb/knock  /opt/tbhm/discovery/knock
 
 echo -e "\n${GREEN}[+]${RESET} Installing ${GREEN}ground-control${RESET}"
 git clone https://github.com/jobertabma/ground-control /opt/tbhm/web/ground-control 
@@ -649,7 +647,6 @@ git clone https://github.com/epinna/tplmap /opt/tbhm/web/tplmap
 
 echo -e "\n${GREEN}[+]${RESET} Installing ${GREEN}psychopath ${RESET}"
 git clone https://github.com/ewilded/psychopath /opt/tbhm/web/psychopath 
-
 
 echo -e "\n${GREEN}[+]${RESET} Installing ${GREEN}autosubtakeover${RESET}"
 git clone https://github.com/JordyZomer/autoSubTakeover /opt/tbhm/misc/autosubtakeover 
@@ -669,7 +666,6 @@ git clone https://github.com/michenriksen/gitrob /opt/tbhm/misc/gitrob
 echo -e "\n${GREEN}[+]${RESET} Installing ${GREEN}trufflehog   ${RESET}"
 git clone https://github.com/dxa4481/truffleHog /opt/tbhm/misc/trufflehog  
 
-##### GitHub Repositories 
 
 ##### Install PEDA
 echo -e "\n${GREEN}[+]${RESET} Installing ${GREEN}PEDA${RESET}"
@@ -687,20 +683,66 @@ git clone https://github.com/zardus/ctf-tools /opt/ctf-tools
 ##### Install GitTools
 echo -e "\n${GREEN}[+]${RESET} Installing ${GREEN}GitTools${RESET}"
 git clone https://github.com/internetwache/GitTools /opt/gittools
-
 echo "
 if [ -z $1 ]; then
   echo \"Usage: $0 website.com\"
   exit
 fi
 TARGET=$1
-DIRCLONE=/root/Desktop/$TARGET\"_clone\"
-DIRDUMP=/root/Desktop/$TARGET\"_dump\"
+python3 /opt/tools-tbhm/discovery/sublist3r/sublist3r.py -d $TARGET -o /root/$TARGET
+
+MYFILE=/root/$TARGET
+num_lines=$(wc -l $MYFILE | cut -d ' ' -f 1)
+num=1
+while read line; do
+  echo \"($num/$num_lines) - $line\"
+  remote_http=$(curl -l --user-agent \"Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101 Firefox/52.0\" --connect-timeout 2 http://$line/.git/config 2>/dev/null | grep \"\[remote\" )
+  if [[ ! -z $remote_http ]]; then
+    echo \"(HTTP) Git Found:\" $line
+    echo $remote_http
+    echo
+  fi
+  remote_https=$(curl -k -l --user-agent \"Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101 Firefox/52.0\" --connect-timeout 2 https://$line/.git/config 2>/dev/null | grep \"\[remote\" )
+  if [[ ! -z $remote_https ]]; then
+    echo \"(HTTPS) Git Found:\" $line
+    echo $remote_https
+    echo
+  fi
+  num=$((num + 1 ))
+done <$MYFILE
+rm $MYFILE" >> /opt/gittools/check_git.sh
+
+echo "
+if [ -z $1 ]; then
+  echo \"Usage: $0 website.com\"
+  exit
+fi
+
+TARGET=$1
+DIRCLONE=/root/Desktop/gitpwn/clone/clone_$TARGET
+DIRDUMP=/root/Desktop/gitpwn/dump/dump_$TARGET
 echo \"Downloading git repo from $TARGET\"
-bash /opt/gittools/Dumper/gitdumper.sh $TARGET/.git/ $DIRCLONE
-git checkout -- $DIRCLONE
-bash /opt/gittools/Extractor/extractor.sh $DIRCLONE $DIRDUMP
-find $DIRDUMP -name \"commit-meta.txt\" -exec cat {} \; > all-commit-meta.txt " >> /opt/gittools/download_git.sh
+
+remote_http=$(curl -l --user-agent \"Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101 Firefox/52.0\" --connect-timeout 2 http://$TARGET/.git/config 2>/dev/null | grep \"\[remote\" )
+if [[ ! -z $remote_http ]]; then
+  bash /opt/gittools/Dumper/gitdumper.sh http://$TARGET/.git/ $DIRCLONE
+  cd $DIRCLONE
+  git checkout -- .
+  bash /opt/gittools/Extractor/extractor.sh $DIRCLONE $DIRDUMP
+  find $DIRDUMP -name \"commit-meta.txt\" -exec cat {} \; > $DIRDUMP/all-commit-meta.txt
+  exit
+fi
+
+remote_https=$(curl -k -l --user-agent \"Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101 Firefox/52.0\" --connect-timeout 2 https://$TARGET/.git/config 2>/dev/null | grep \"\[remote\" )
+if [[ ! -z $remote_https ]]; then
+  bash /opt/gittools/Dumper/gitdumper.sh https://$TARGET/.git/ $DIRCLONE
+  cd $DIRCLONE
+  git checkout -- .
+  bash /opt/gittools/Extractor/extractor.sh $DIRCLONE $DIRDUMP
+  find $DIRDUMP -name \"commit-meta.txt\" -exec cat {} \; > $DIRDUMP/all-commit-meta.txt
+  exit
+fi" >> /opt/gittools/download_git.sh
+
 
 ##### Install mimipenguin
 echo -e "\n${GREEN}[+]${RESET} Installing ${GREEN}mimipenguin${RESET}"

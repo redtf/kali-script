@@ -5,6 +5,10 @@ We accept Pull Request :)
 Based on g0tmi1k scripts [**GitHub g0tmi1k**](https://github.com/g0tmi1k/os-scripts).
 
 # Changelog
+## 30/12/2017
+- Add golang
+- Add aquatone
+
 ## 07/09/2017
 - Add Tools of "The Bug Hunters Methodology V2 by @jhaddix
 - Change repo sublist3r with new features

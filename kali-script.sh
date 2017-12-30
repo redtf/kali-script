@@ -778,6 +778,16 @@ echo -e "\n${GREEN}[+]${RESET} Installing ${GREEN}ltrace${RESET} ~ Linux debuggi
 apt -y -qq install ltrace \
   || echo -e ' '${RED}'[!] Issue with apt install'${RESET} 1>&2
 
+##### Install golang
+echo -e "\n${GREEN}[+]${RESET} Installing ${GREEN}golang${RESET} ~ Go Lang"
+apt -y -qq install golang \
+  || echo -e ' '${RED}'[!] Issue with apt golang'${RESET} 1>&2
+  
+##### Install aquatone
+echo -e "\n${GREEN}[+]${RESET} Installing ${GREEN}aquatone${RESET} ~ A Tool for Domain Flyovers "
+gem install aquatone \
+  || echo -e ' '${RED}'[!] Issue with gem install aquatone'${RESET} 1>&2
+
 ##### Install gcc & multilib
 echo -e "\n${GREEN}[+]${RESET} Installing ${GREEN}gcc${RESET} & ${GREEN}multilibc${RESET} ~ compiling libraries"
 for FILE in cc gcc g++ gcc-multilib make automake lsibc6 libc6-dev libc6-amd64 libc6-dev-amd64 libc6-i386 libc6-dev-i386 libc6-i686 libc6-dev-i686 dpkg-dev; do
